@@ -91,9 +91,9 @@ class _LoginFormState extends State<LoginForm> {
               ),
               TextFormField(
                 controller: _emailController,
-                decoration: InputDecoration(
-                    icon: Icon(Icons.email),
-                    labelText: 'Email'
+                decoration:  InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Email',
                 ),
                 keyboardType: TextInputType.emailAddress,
                 autovalidate: true,
@@ -105,7 +105,6 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             controller: _passwordController,
             decoration: InputDecoration(
-                icon: Icon(Icons.lock),
                 labelText: 'Password'
             ),
             obscureText: true,
