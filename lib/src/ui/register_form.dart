@@ -103,7 +103,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: false,
                     autovalidate: true,
                     validator: (_){
-                      return !state.isEmailValid ?'Invalid Email' : null;
+                      return !state.isEmailValid ? 'Invalid Email' : null;
                     },
                   ),
                   //textPassword
@@ -117,7 +117,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     autocorrect: false,
                     autovalidate: true,
                     validator:(_){
-                      return !state.isPasswordValid ? '' : null;
+                      return !state.isPasswordValid ? 'Invalid password' : null;
                     },
                   ),
                   //button

@@ -88,8 +88,6 @@ class _LoginFormState extends State<LoginForm> {
           child: ListView(
             children: <Widget>[
               Padding(padding:EdgeInsets.symmetric(vertical: 20),
-              child: Image.asset('assets/Imagotipo.png', height: 100,
-              ),
               ),
               TextFormField(
                 controller: _emailController,

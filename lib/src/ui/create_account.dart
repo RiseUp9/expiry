@@ -16,7 +16,7 @@ CreateAcountButton({ Key key, @required UserRepository userRepository})
     child: Text('Create Account'),
     onPressed: (){
       Navigator.of(context).push(MaterialPageRoute(builder: (context){
-        return RegisterScreen(userRepository: _userRepository);
+        return RegisterScreen(userRepository: _userRepository,);
       })
       );
     },

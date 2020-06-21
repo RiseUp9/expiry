@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 
-class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
+class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
 
   RegisterBloc({@required UserRepository userRepository})
@@ -32,10 +32,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
       transitionFn,
     );
   }
-
-
-
-
 
   @override
   Stream<RegisterState> mapEventToState(
@@ -79,6 +75,5 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
       yield RegisterState.failure();
     }
   }
-
 
 }
