@@ -83,37 +83,73 @@ class _LoginFormState extends State<LoginForm> {
           }
         },
       child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state){
-        return Padding( padding: EdgeInsets.all(20.0),
+        return Padding( padding: EdgeInsets.fromLTRB(30, 80, 30, 10),
         child: Form(
           child: ListView(
             children: <Widget>[
-              Padding(padding:EdgeInsets.symmetric(vertical: 20),
+              Padding(padding:EdgeInsets.symmetric(vertical:40),
               ),
-              TextFormField(
-                controller: _emailController,
-                decoration:  InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: 'Email',
+
+              new SizedBox(
+                height: 50,
+                child:TextFormField(
+                  textAlign: TextAlign.center,
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xfffafafa)),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xfffafafa)),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      fillColor: Color(0xFFFFFFFF),
+                      filled: true,
+                      hintText: " Email",
+                      hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E), height: 1.0)
+                  ),
+                  maxLines: 1,
+                  minLines: 1,
+                  keyboardType: TextInputType.emailAddress,
+                  autovalidate: true,
+                  autocorrect: false,
+                  validator: (_){
+                    return !state.isEmailValid? 'Invalid Email': null;
+                  },
                 ),
-                keyboardType: TextInputType.emailAddress,
+              ),
+
+              Padding(padding:EdgeInsets.symmetric(vertical: 5),
+              ),
+          new SizedBox(
+            height: 50,
+              child:TextFormField(
+                textAlign: TextAlign.center,
+                controller: _passwordController,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xfffafafa)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xfffafafa)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    ),
+                    fillColor: Color(0xFFFFFFFF),
+                    filled: true,
+                    hintText: " Password",
+                    hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E))
+                ),
+                obscureText: true,
                 autovalidate: true,
                 autocorrect: false,
                 validator: (_){
-                  return !state.isEmailValid? 'Invalid Email': null;
+                  return !state.isPasswordValid? 'Invalid Password': null;
                 },
               ),
-          TextFormField(
-            controller: _passwordController,
-            decoration: InputDecoration(
-                labelText: 'Password'
-            ),
-            obscureText: true,
-            autovalidate: true,
-            autocorrect: false,
-            validator: (_){
-              return !state.isPasswordValid? 'Invalid Password': null;
-            },
           ),
+
               Padding(padding: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -7,7 +7,7 @@ class LoginButton extends StatelessWidget{
   : _onPressed = onPressed,
   super(key : key);
 
-  @override
+
   Widget build(BuildContext context) {
     return RaisedButton(
       shape: RoundedRectangleBorder(

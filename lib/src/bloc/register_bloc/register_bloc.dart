@@ -2,12 +2,17 @@ import 'package:bloc/bloc.dart';
 import 'package:expiry/src/bloc/register_bloc/bloc.dart';
 import 'package:expiry/src/repository/user_repository.dart';
 import 'package:expiry/src/util/validators.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
+  
+  final firestoreIntance = Firestore.instance;
 
   RegisterBloc({@required UserRepository userRepository})
       : assert(userRepository != null),
@@ -71,9 +76,34 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       await _userRepository.signUp(email, password);
       yield RegisterState.success();
+  // mandar llamar la funcion para registrar en la base de datos.
+      _seRegistro();
     } catch (_) {
       yield RegisterState.failure();
+
+      // aquí no se pudó, por alguna razón
     }
+  }
+
+  // --users
+  //      --- id 21331
+  //      -------- mail : rubi@sexy.com
+  //      -------- nombre : rubi
+  //      -------- productos :
+
+  //      --- id 12314
+  //      --------- nombre : gerardo
+
+
+  void _seRegistro() async {
+    var usuarioFirebase = await FirebaseAuth.instance.currentUser();
+    firestoreIntance.collection("users").document(usuarioFirebase.uid).setData(
+      {
+        "email" : usuarioFirebase.email
+      }
+  ).then((_){
+    print("exito!!!");
+  });
   }
 
 }
