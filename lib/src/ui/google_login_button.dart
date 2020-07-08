@@ -25,6 +25,7 @@ class GoogleLoginButton extends StatelessWidget {
             LoginWhitGooglePressed()
         );
       },
+        borderRadius: 8.0
     );
   }
 }

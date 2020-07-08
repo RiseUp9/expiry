@@ -11,9 +11,13 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  // Dos variables
+  // Dos variable
+
+  String username;
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   RegisterBloc _registerBloc;
 
@@ -30,6 +34,7 @@ class _RegisterFormState extends State<RegisterForm> {
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
+    _usernameController.addListener(_onUsernameChanged);
   }
 
 
@@ -37,6 +42,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 
@@ -92,34 +98,97 @@ class _RegisterFormState extends State<RegisterForm> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  Padding(padding:EdgeInsets.symmetric(vertical:40),
+                  ),
+                  //textName
+                  new SizedBox(
+                      child:TextFormField(
+                        textAlign: TextAlign.center,
+                        controller: _usernameController,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xfffafafa)),
+                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xfffafafa)),
+                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                            ),
+                            fillColor: Color(0xFFFFFFFF),
+                            filled: true,
+                            hintText: "Username",
+                            hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E), height: 1.0)
+                        ),
+                        maxLines: 1,
+                        minLines: 1,
+                        keyboardType: TextInputType.text,
+                        autocorrect: false,
+                        autovalidate: true,
+                        validator: (_){
+                          return !state.isUsernameValid ? 'Invalid username' : null;
+                        },
+                      )
+                  ),
+                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
+                  ),
                   //textEmail
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.email),
-                      labelText: 'Email',
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    autocorrect: false,
-                    autovalidate: true,
-                    validator: (_){
-                      return !state.isEmailValid ? 'Invalid Email' : null;
-                    },
+                  new SizedBox(
+                      child:TextFormField(
+                        textAlign: TextAlign.center,
+                        controller: _emailController,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xfffafafa)),
+                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                            ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xfffafafa)),
+                            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                          ),
+                            fillColor: Color(0xFFFFFFFF),
+                            filled: true,
+                            hintText: " Email",
+                            hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E), height: 1.0)
+                        ),
+                        maxLines: 1,
+                        minLines: 1,
+                        keyboardType: TextInputType.emailAddress,
+                        autocorrect: false,
+                        autovalidate: true,
+                        validator: (_){
+                          return !state.isEmailValid ? 'Invalid Email' : null;
+                        },
+                      )
                   ),
                   //textPassword
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
-                      labelText: 'password'
-                    ),
-                      obscureText: true,
-                    autocorrect: false,
-                    autovalidate: true,
-                    validator:(_){
-                      return !state.isPasswordValid ? 'Invalid password' : null;
-                    },
+                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
                   ),
+                 new SizedBox(
+                   child: TextFormField(
+                     textAlign: TextAlign.center,
+                     controller: _passwordController,
+                     decoration: InputDecoration(
+                       enabledBorder: OutlineInputBorder(
+                         borderSide: BorderSide(color: Color(0xfffafafa)),
+                         borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                       ),
+                       focusedBorder: OutlineInputBorder(
+                       borderSide: BorderSide(color: Color(0xfffafafa)),
+                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                       ),
+                       fillColor: Color(0xFFFFFFFF),
+                       filled: true,
+                       hintText: "Password",
+                         hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E), height: 1.0)
+                     ),
+                     obscureText: true,
+                     autocorrect: false,
+                     autovalidate: true,
+                     validator:(_){
+                       return !state.isPasswordValid ? 'Invalid password' : null;
+                     },
+                   ),
+                 ),
                   //button
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)
@@ -130,7 +199,6 @@ class _RegisterFormState extends State<RegisterForm> {
               ),
             ),
           );
-
         }
       ),
     );
@@ -140,9 +208,12 @@ class _RegisterFormState extends State<RegisterForm> {
     _registerBloc.add(
         Submitted(
             email: _emailController.text,
-            password: _passwordController.text
+            password: _passwordController.text,
+            username: _usernameController.text
         )
     );
+
+
   }
   void _onEmailChanged() {
     _registerBloc.add(
@@ -153,6 +224,11 @@ class _RegisterFormState extends State<RegisterForm> {
   void _onPasswordChanged() {
     _registerBloc.add(
         PasswordChanged(password: _passwordController.text)
+    );
+  }
+  void _onUsernameChanged(){
+    _registerBloc.add(
+        UsernameChanged(username: _usernameController.text)
     );
   }
 }

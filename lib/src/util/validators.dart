@@ -10,7 +10,17 @@ class Validators{
     r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$',
   );
 
+
+  //username
+  static final RegExp _usernameRegExp =  RegExp(
+    r'^[a-zA-Z0-9]+$',
+  );
+
   // 2 funciones:
+  //isUsername
+  static isValidUsername(String username){
+    return _usernameRegExp.hasMatch(username);
+  }
   // isValidEmail
   static isValidEmail(String email){
     return _emailRegExp.hasMatch(email);
