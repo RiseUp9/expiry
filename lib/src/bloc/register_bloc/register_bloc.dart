@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:expiry/src/bloc/register_bloc/bloc.dart';
 import 'package:expiry/src/repository/user_repository.dart';
+import 'package:expiry/src/ui/home_screen.dart';
 import 'package:expiry/src/util/validators.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:expiry/src/ui/register_form.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final UserRepository _userRepository;
@@ -117,8 +120,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         "username" : miUsername
       }
   ).then((_){
-    print("exito!!!");
-  });
+     getHome();
+      print("exito!!!");
+    });
   }
 
+  void getHome() {
+    @override
+    Widget build(BuildContext context) {
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreen()));
+
+    }
+  }
 }

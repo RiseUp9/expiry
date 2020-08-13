@@ -1,6 +1,7 @@
 import 'package:expiry/src/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:expiry/src/bloc/authentication_bloc/authentication_event.dart';
 import 'package:expiry/src/bloc/register_bloc/bloc.dart';
+import 'package:expiry/src/ui/home_screen.dart';
 import 'package:expiry/src/ui/register_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,18 +95,20 @@ class _RegisterFormState extends State<RegisterForm> {
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state){
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(30, 80, 30, 10),
             child: Form(
               child: ListView(
                 children: <Widget>[
                   Padding(padding:EdgeInsets.symmetric(vertical:40),
                   ),
+
                   //textName
                   new SizedBox(
                       child:TextFormField(
                         textAlign: TextAlign.center,
                         controller: _usernameController,
                         decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Color(0xfffafafa)),
                               borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -129,7 +132,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         },
                       )
                   ),
-                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
+                  Padding(padding:EdgeInsets.symmetric(vertical: 4),
                   ),
                   //textEmail
                   new SizedBox(
@@ -137,6 +140,7 @@ class _RegisterFormState extends State<RegisterForm> {
                         textAlign: TextAlign.center,
                         controller: _emailController,
                         decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Color(0xfffafafa)),
                               borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -161,13 +165,14 @@ class _RegisterFormState extends State<RegisterForm> {
                       )
                   ),
                   //textPassword
-                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
+                  Padding(padding:EdgeInsets.symmetric(vertical: 4),
                   ),
                  new SizedBox(
                    child: TextFormField(
                      textAlign: TextAlign.center,
                      controller: _passwordController,
                      decoration: InputDecoration(
+                         contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
                        enabledBorder: OutlineInputBorder(
                          borderSide: BorderSide(color: Color(0xfffafafa)),
                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -189,6 +194,8 @@ class _RegisterFormState extends State<RegisterForm> {
                      },
                    ),
                  ),
+                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
+                  ),
                   //button
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)
@@ -231,6 +238,7 @@ class _RegisterFormState extends State<RegisterForm> {
         UsernameChanged(username: _usernameController.text)
     );
   }
+
 }
 
 

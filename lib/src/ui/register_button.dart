@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class RegisterButton extends StatelessWidget{
   final VoidCallback _onPressed;
@@ -9,12 +10,19 @@ class RegisterButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return Container(
+        height: 40,
+        child: RaisedButton(
+          color: Hexcolor('#1F252E'),
+          textColor: Hexcolor('#FF8000'),
+          disabledTextColor: Hexcolor('#1F252E'),
+          disabledColor: Hexcolor('#FF8000'),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0)
+        borderRadius: BorderRadius.circular(9.0),
       ),
       onPressed: _onPressed,
       child: Text('Register'),
+    ),
     );
   }
 

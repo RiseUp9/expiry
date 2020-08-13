@@ -9,6 +9,8 @@ import 'package:expiry/src/ui/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:expiry/src/repository/user_repository.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -89,26 +91,25 @@ class _LoginFormState extends State<LoginForm> {
             children: <Widget>[
               Padding(padding:EdgeInsets.symmetric(vertical:40),
               ),
-
-              new SizedBox(
-                height: 50,
-                child:TextFormField(
+             new SizedBox(
+              child:TextFormField(
                   textAlign: TextAlign.center,
                   controller: _emailController,
-                  decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xfffafafa)),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xfffafafa)),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                      ),
-                      fillColor: Color(0xFFFFFFFF),
-                      filled: true,
-                      hintText: " Email",
-                      hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E), height: 1.0)
-                  ),
+                decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xfffafafa)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xfffafafa)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0) ),
+                    ),
+                    fillColor: Color(0xFFFFFFFF),
+                    filled: true,
+                    hintText: " Email",
+                    hintStyle: TextStyle(fontSize: 13, color: Color(0xFF1F252E),height: 1.0)
+                ),
                   maxLines: 1,
                   minLines: 1,
                   keyboardType: TextInputType.emailAddress,
@@ -118,16 +119,16 @@ class _LoginFormState extends State<LoginForm> {
                     return !state.isEmailValid? 'Invalid Email': null;
                   },
                 ),
-              ),
+             ),
 
               Padding(padding:EdgeInsets.symmetric(vertical: 5),
               ),
           new SizedBox(
-            height: 50,
               child:TextFormField(
                 textAlign: TextAlign.center,
                 controller: _passwordController,
                 decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 1.0),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0xfffafafa)),
                       borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -160,6 +161,8 @@ class _LoginFormState extends State<LoginForm> {
                     onPressed: isLoginButtonEnabled(state)
                         ? _onFormSubmitted
                         : null,
+                  ),
+                  Padding(padding:EdgeInsets.symmetric(vertical: 5),
                   ),
                   //GoogleLoginButton
                   GoogleLoginButton(),
